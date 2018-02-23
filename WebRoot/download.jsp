@@ -21,63 +21,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 <script type="text/javascript">
-	window.setInterval(getMessage, 5000);
-	
-
-	function getMessage() 
-	{
-		$.ajax({
-        async :false,
-        type : "GET",
-        dataType : "json",
-        url :"getmessage.action",
-        success : function(data) {
-        	//var json=eval("("+data+")");
-        	if(data==null){
-        		document.getElementById("message").innerHTML="";
-        	}else{
-     			document.getElementById("message").innerHTML=data.message.num;//
-			}
-		
-	    }
-	    });
-	    }
-	
 	function go(FileName,FileSize,location1){
 		location1=location1+"kuohao";
 		location1=location1.replace(/\//g,"xiegang");
 		location.href = "fileordir.action?FileName="+encodeURI(encodeURI(FileName))+"&FileSize="+encodeURI(encodeURI(FileSize))+"&location1="+encodeURI(encodeURI(location1));
 	}
-	
-	function upload(){
-	 var loc=document.getElementById('current_location').innerHTML;
-	 loc=loc+"kuohao";
-	 loc=loc.replace(/\//g,"xiegang");
-	 var myfile=document.getElementById("myFile").value;
-	 if(myfile!=""){
-	 	document.getElementById("uploadprocess").innerHTML="<div class='progress'><div class='progress-bar progress-bar-striped active' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='min-width: 2em;width: 100%'>上传中...</div></div>";
-     	document.uploadForm.action="upload.action?location1="+encodeURI(encodeURI(loc));
-     	document.uploadForm.submit();
-     }else{
-     	document.getElementById("uploadBtn").innerHTML="请选择文件";
-     }
-   }
-   
-   
-
-   
-     function searchFile(){
-	 var filename=searchForm.searchedFilename.value;
-	 document.getElementById("searchprocess").innerHTML="<div class='progress'><div class='progress-bar progress-bar-striped active' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='min-width: 2em;width: 100%'>搜索中...</div></div>";
-     document.searchForm.action="search.action?filename="+encodeURI(encodeURI(filename));
-     document.searchForm.submit();
-   }
-	</script>
-<script type="text/javascript">
-		function load(){
-		window.location.href = "getfile.action";i++;
-		return;
-		}
 	</script>
   </head>
   
@@ -104,33 +52,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </tr>
       </table>
       </form> 
-    <table class="table table-hover table-bordered table-striped" id="mytable">
+      <form action="getall.action" method="post" enctype="multipart/form-data">
+    <table>
+    <a href="getall.action">全部文件</a>
     <tr>
         <td>选择</td>
         <td>文件名</td>
-
-       <td>文件大小</td>
-       <td>修改时间</td>
+      	<td>文件大小</td>
+        <td>修改时间</td>
     </tr>
-
     <c:forEach var="file" items="${filesList}" varStatus="status">   
-         <tr>
-         	<td>
-         	<c:if test="${file.size=='null'}">
-            	<input type="checkbox" data-toggle="toggle" data-on="已选中" data-off="文件夹" data-onstyle="success" data-offstyle="primary" data-size="small">
-            </c:if>
-            <c:if test="${file.size!='null'}">
-            	<input type="checkbox" data-toggle="toggle" data-on="已选中" data-off="文件" data-onstyle="success" data-offstyle="info" data-size="small">
-            </c:if>
-            </td>
-            <td style="cursor:pointer" onClick="javascript:go('${file.filename}','${file.size}','${file.location}')">${file.filename}</td>
-
-           <td>${file.size}</td>
-           <td>${file.time}</td>
-
-        </tr>
     </c:forEach>
-
 </table>
+</form>
   </body>
 </html>
