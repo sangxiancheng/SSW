@@ -3,13 +3,16 @@
     <title>登录处理</title>
   </head>
   <body>
+  <jsp:useBean id="Users" class="beans.Users" />
+  <jsp:setProperty name="Users" property="*" />
   <%
   request.setCharacterEncoding("UTF-8");
   String name=request.getParameter("name");
-  String pw=request.getParameter("pw");
-  if(name!=null&&pw!=null&&name.equals("admin")&&pw.equals("123"))
+  String pw=request.getParameter("password");
+  String result = Users.getPw();
+  if(name!=null&&pw!=null&&pw.equals(result))
   {
-  response.sendRedirect("success.jsp?name="+name);
+  response.sendRedirect("main.jsp?name="+name);
   }
   else
   {

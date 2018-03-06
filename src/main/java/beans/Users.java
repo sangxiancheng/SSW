@@ -1,12 +1,21 @@
 package beans;
-import java.sql.*;
+import java.util.List;
+import java.util.Map;
+import beans.DBUtil;
 public class Users {
 	private String name;// 用户姓名
 	private String sex;//性别
 	private String password;//密码
 	private String telephone;//联系电话
-	private int returnNum;//返回数
-	public String  getName(){
+	private String major;//专业
+	private String class1;//班级
+	private String truename;//真实姓名
+	private String email;//电子邮箱
+	private DBUtil db;
+	public Users(){
+		db = new DBUtil();
+	}
+	public String getName(){
 		return name;
 	}
 	public void setName(String name){
@@ -30,26 +39,50 @@ public class Users {
 	public void setTelephone(String telephone){
 		this.telephone=telephone;
 	}
-	public int addStudent(){
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql:" +
-					"//118.25.16.118:3306/ssw","ssw","smussw222");			
-			String sql = "insert into usertable(Name,Sex,Password,Telephone) values(?,?,?,?)";
-			String[] params = {name,sex,password,telephone};
-			PreparedStatement pstmt=con.prepareStatement(sql);
-			for(int i=0;i<params.length;i++)
-				try{
-					pstmt.setString(i+1, params[i]);
-				}
-				catch(Exception e){
-					e.printStackTrace();
-				}
-			returnNum=pstmt.executeUpdate();
-		}
-		catch(Exception e){ 
-			e.printStackTrace();
-		}
-		return returnNum;
+	//添加用户信息
+	public int addUser(){
+		int result = 0;
+		String sql = "insert into usertable(Name,Sex,Password,Telephone) values(?,?,?,?)";
+		String[] params = {name,sex,password,telephone};
+		result = db.update(sql, params);
+		return result;
+	}
+	//查看所有用户信息
+	public List getAllUsers(){
+		List users = null;
+		String sql = "select * from ssw.usertable";
+		users = db.getList(sql, null);
+		return users;
+	}
+	//通过用户Name查询用户信息
+	public Map getUser(){
+		Map user = null;
+		String sql = "select * from usertable where Name=?";
+		String[] params={name};
+		user = db.getMap(sql, params);
+		return user;
+	}
+	//通过用户Name修改用户信息
+	public int updateUser(){
+		int result = 0;
+		String sql = "update usertable set Sex=?,Major=?,Class=?,TrueName=?,Email=? where Name=?";
+		String[] params = {sex,major,class1,truename,email,name};
+		result = db.update(sql, params);
+		return result;
+	}
+	//删除用户信息
+	public int delUser(){
+		int result = 0;
+		String sql = "delete from usertable where Name=?";
+		String[] params = {name};
+		result = db.update(sql, params);
+		return result;
+	}
+	public String getPw(){
+		String result = null;
+		String sql = "select Password from usertable where Name=?";
+		String[] params = {name};
+		result = db.getPassword(sql, params);
+		return result;
 	}
 }
