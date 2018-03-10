@@ -13,23 +13,22 @@ import javax.swing.JOptionPane;
 
 public class DownloadAction  extends ActionSupport{  
     // username属性用来封装用户名  
-    private String FileName;  
+    private String VideoName;  
           
    //获得FileFileName值  
-    public String getFileName() {  
-        return FileName;  
+    public String getVideoName() {  
+        return VideoName;  
     }  
   
     //设置FileName值  
-    public void setFileName(String FileName) { 
-        this.FileName = FileName;  
+    public void setVideoName(String VideoName) { 
+        this.VideoName = VideoName;  
     }  
 
     public InputStream getInputStream() {
     	org.apache.hadoop.conf.Configuration  configuration= new Configuration();
-
 		FileSystem fileSystem =null;
-		Path path=new Path(FileName);
+		Path path=new Path(VideoName);
 		FSDataInputStream in=null;
 		try{
 			fileSystem=FileSystem.get(configuration);

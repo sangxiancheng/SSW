@@ -14,7 +14,7 @@
   String result = Users.getPw();
   if(name!=null&&pw!=null&&pw.equals(result))
   {
-  response.sendRedirect("main.jsp?name="+name);
+  response.sendRedirect("main.jsp?username="+name);
   }
   else
   {

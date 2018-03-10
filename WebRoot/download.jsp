@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <table>  
             <tr>  
                 <td>文件名:</td>  
-                <td><input type="text" name="FileName" ></td>  
+                <td><input type="text" name="VideoName" ></td>  
             </tr>  
             <tr>  
                 <td><input type="submit" value="下载"></td>   
