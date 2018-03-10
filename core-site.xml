@@ -2,6 +2,6 @@
 <configuration>
 <property>
     <name>fs.default.name</name>
-    <value>hdfs://10.72.51.207:9000</value>
+    <value>hdfs://10.72.51.207:9000/user/user</value>
 </property>
 </configuration>
