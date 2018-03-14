@@ -38,8 +38,8 @@ public class AuthFilter implements Filter {
         String targetURL = currentURL.substring(currentURL.indexOf("/", 1),currentURL.length());  
         // 截取到当前文件名用于比较  
         HttpSession session = request.getSession(false);  
-        if (!"/login.html".equals(targetURL)) {// 判断当前页是否是重定向以后的登录页面页面，如果是就不做session的判断，防止出现死循环  
-            if (session == null || session.getAttribute("user") == null) {  
+        if (!("/login.html".equals(targetURL)||"/login.jsp".equals(targetURL)||"/regist.jsp".equals(targetURL))) {// 判断当前页是否是重定向以后的登录页面页面，如果是就不做session的判断，防止出现死循环  
+            if (session == null || session.getAttribute("username") == null) {  
                 // *用户登录以后需手动添加session  
                 //System.out.println("request.getContextPath()="  + request.getContextPath());  
                 response.sendRedirect(request.getContextPath() + "/login.html");  

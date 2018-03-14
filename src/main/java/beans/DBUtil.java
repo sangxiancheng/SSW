@@ -63,10 +63,18 @@ public class DBUtil {
 	}
 	private void setParams(String sql,String[] params){
 		pstmt=this.getPrepareStatement(sql);
+		System.out.println("字符串的长度为："+params.length);
+		
+		System.out.println(params[0]);
 		if(params!=null)
 		{
+		for(int j=0;j<params.length;j++)
+		{
+			System.out.println(params[j]);
+		}
 		for(int i=0;i<params.length;i++)
 			try{
+				
 				pstmt.setString(i+1, params[i]);
 			}
 			catch(SQLException e){
