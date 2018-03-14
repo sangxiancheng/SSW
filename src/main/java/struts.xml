@@ -9,7 +9,8 @@
     <constant name="struts.multipart.maxSize" value="10701096"/>
     <package name="com.bik.action" extends="struts-default">  
      <action name="upload" class="com.bik.action.UploadAction">
-           <result name="success">/result.jsp</result>  
+           <result name="success">/success.jsp</result>
+           <result name="error">/error.jsp</result>
            <result name="input">/upload.jsp</result> 
      </action>  
      <action name="download" class="com.bik.action.DownloadAction">
@@ -17,13 +18,6 @@
                <param name="contentType">application/octet-stream</param>
                <param name="inputName">inputStream</param>
                <param name="contentDisposition">attachment;filename=${VideoName}</param>
-               <param name="bufferSize">4096</param>
-           </result>
-     </action>
-     <action name="getall" class="com.bik.action.GetAllAction">
-           <result type="stream">
-               <param name="contentType">application/octet-stream</param>
-               <param name="contentDisposition">attachment;filesList=${filesList}</param>
                <param name="bufferSize">4096</param>
            </result>
      </action>

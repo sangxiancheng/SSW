@@ -8,13 +8,15 @@
   <jsp:useBean id="Users" class="beans.Users" />
   <jsp:setProperty name="Users" property="*" />
   <%
-
+  request.setCharacterEncoding("UTF-8");
   String name=request.getParameter("name");
   String pw=request.getParameter("password");
   String result = Users.getPw();
   if(name!=null&&pw!=null&&pw.equals(result))
   {
+  session.setAttribute("username", name);
   response.sendRedirect("main.jsp?username="+name);
+  out.println("<h3>登录成功</h3>");
   }
   else
   {

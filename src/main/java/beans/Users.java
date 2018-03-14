@@ -55,11 +55,11 @@ public class Users {
 		return users;
 	}
 	//通过用户Name查询用户信息
-	public Map getUser(){
-		Map user = null;
+	public List getUserByName(){
+		List user = null;
 		String sql = "select * from usertable where Name=?";
 		String[] params={name};
-		user = db.getMap(sql, params);
+		user = db.getList(sql, params);
 		return user;
 	}
 	//通过用户Name修改用户信息

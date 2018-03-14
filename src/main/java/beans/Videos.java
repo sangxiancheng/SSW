@@ -6,7 +6,7 @@ import beans.DBUtil;
 public class Videos {
 	private String videoid;//视频ID
 	private String videoname;//视频名称
-	private String videosize;//视频大小
+	private float videosize;//视频大小
 	private String videolocation;//视频存放位置
 	private String videocomments;//视频信息
 	private String videokeys;//视频关键字
@@ -27,10 +27,10 @@ public class Videos {
 	public void setVideoname(String videoname){
 		this.videoname=videoname;
 	}
-	public String getVideosize(){
+	public float getVideosize(){
 		return videosize;
 	}
-	public void setVideosize(String videosize){
+	public void setVideosize(float videosize){
 		this.videosize=videosize;
 	}
 	public String getVideolocation(){
@@ -60,18 +60,28 @@ public class Videos {
 	//添加video信息
 	public int addVideo(){
 		int result = 0;
+		String size=String.valueOf(videosize);
 		String sql = "insert into videotable(VideoName,VideoSize,VideoLocation,VideoComments,VideoKeys,VideoDate,Name) values(?,?,?,?,?,now(),?)";
-		String[] params = {videoname,videosize,videolocation,videocomments,videokeys,name};
+		String[] params = {videoname,size,videolocation,videocomments,videokeys,name};
 		result = db.update(sql, params);
 		return result;
 	}
 	//获取所有video信息
 	public List getAllVideos(){
 		List videos = null;
-		String sql = "select VideoID,VideoName,VideoSize,VideoLocation,VideoComments,VideoKeys,date(VideoDate),Name from videotable";
-		videos = db.getList(sql, null);
+		String sql = "select VideoID,VideoName,VideoSize,VideoLocation,VideoComments,VideoKeys,date(VideoDate),Name from videotable where Name=?";
+		String[] params={name};
+		videos = db.getList(sql, params);
 		return videos;
 	}
+	//通过上传者查询videos信息
+		public List getVideosByName(){
+			List videos = null;
+			String sql = "select VideoID,VideoName,VideoSize,VideoLocation,VideoComments,VideoKeys,date(VideoDate),Name from videotable where Name=?";
+			String[] params={name};
+			videos = db.getList(sql, params);
+			return videos;
+		}
 	//通过VideoID查询videos信息
 	public Map getVideoByVideoID(){
 		Map videos = null;
@@ -96,19 +106,13 @@ public class Videos {
 		videos = db.getMap(sql, params);
 		return videos;
 	}
-	//通过上传者查询videos信息
-	public Map getVideosByName(){
-		Map videos = null;
-		String sql = "select VideoID,VideoName,VideoSize,VideoLocation,VideoComments,VideoKeys,date(VideoDate),Name from videotable where name=?";
-		String[] params={name};
-		videos = db.getMap(sql, params);
-		return videos;
-	}
+	
 	//通过VideoID修改video信息
 	public int updateVideo(){
 		int result = 0;
+		String size=String.valueOf(videosize);
 		String sql = "update videotable set VideoName=?,VideoSize=?,VideoLocation=?,VideoComments=?,VideoKeys=?,VideoDate=now(),Name=? where VideoID=?";
-		String[] params = {videoname,videosize,videolocation,videocomments,videokeys,name,videoid};
+		String[] params = {videoname,size,videolocation,videocomments,videokeys,name,videoid};
 		result = db.update(sql, params);
 		return result;
 	}
