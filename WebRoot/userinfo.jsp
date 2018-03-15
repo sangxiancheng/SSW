@@ -1,9 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
+<%@ page language="java" import="java.util.*" import="beans.Users" pageEncoding="UTF-8"%>
+<%@ include file="mainhead.jsp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -19,38 +15,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
   </head>
   
   <body>
-  <%
-  	String username=session.getAttribute("username").toString();
-   %>
-  <h3>欢迎<a href="userinfo.jsp"><%=session.getAttribute("username") %></a><a href="logout.jsp">退出登录</a></h3>
   <jsp:useBean id="user" class="beans.Users"></jsp:useBean>
   <jsp:setProperty name="user" property="name"  value="<%=request.getParameter(\"username\") %>"/>
-  <table align="center" width="50%" border="1">
-  <caption><%=session.getAttribute("username") %>的个人信息</caption>
-  <%=request.getParameter("username") %>
-  <tr><th>用户名</th><th>密码</th><th>性别</th><th>专业</th><th>班级</th><th>联系电话</th><th>真实姓名</th><th>电子邮箱</th></tr>
   <%
   ArrayList users = (ArrayList)user.getUserByName();
   for(Object o:users){
   	Map m = (HashMap)o;
-   %>
-   <tr>
-   <td><%=m.get("Name") %></td>
-   <td><%=m.get("Password") %></td>
-   <td><%=m.get("Sex") %></td>
-   <td><%=m.get("Major") %></td>
-   <td><%=m.get("Class") %></td>
-   <td><%=m.get("Telephone") %></td>
-   <td><%=m.get("TrueName") %></td>
-   <td><%=m.get("Email") %></td>
-   </tr>
+  %>
+   <form name="form" action="modification.action" method="post">
+  <table class="table table-bordered">
+  <caption><%=session.getAttribute("username") %>的个人信息</caption>
+    <tr><th>用户名</th><td><input type="text" name="name" value="<%=m.get("Name") %>" readonly="true"></td></tr>	
+    <tr><th>性别</th><td><input type = "text" name = "sex" value = "<%=m.get("Sex") %>"></td></tr>
+	<tr><th>联系电话</th><td><input type="text" name="telephone" value="<%=m.get("Telephone") %>"></td></tr>
+	<tr><th>专业</th><td><input type="text" name="major" value="<%=m.get("Major") %>"></td></tr>
+	<tr><th>班级</th><td><input type="text" name="class1" value="<%=m.get("Class") %>"></td></tr>
+	<tr><th>真实姓名</th><td><input type="text" name="truename" value="<%=m.get("TrueName") %>"></td></tr>
+	<tr><th>Email</th><td><input type="text" name="email" value="<%=m.get("Email") %>"></td></tr>
+	<tr><th colspan="2"><input type="submit" value="修改">
+	<input type="reset" value="重置"></th></tr>
+	</table>
+	</form>
    <%
    }
     %>
-  </table>
+  
   </body>
 </html>

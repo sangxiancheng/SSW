@@ -1,8 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+<%@ include file="mainhead.jsp" %>
+
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -24,16 +22,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <%
-  String username=session.getAttribute("username").toString();
-    out.println("<h3>欢迎"+session.getAttribute("username")+",登录成功！</h3>");
-   %>
-  <h3>欢迎<a href="userinfo.jsp?username=<%=username%>"><%=session.getAttribute("username") %></a>,<a href="logout.jsp">退出登录</a></h3>
-
   <jsp:useBean id="video" class="beans.Videos"></jsp:useBean>
   <jsp:setProperty name="video" property="name" value="<%=request.getParameter(\"username\") %>"/>
   <table align="center" width="50%" border="1">
-  <caption>所有视频信息</caption>
+  <caption>我上传的视频</caption>
   <tr><th>视频ID</th><th>视频名称</th><th>视频关键字</th><th>视频大小</th><th>更新日期</th><th>上传者</th><th>详情</th><th>在线播放</th><th>下载</th></tr>
    <%
   ArrayList videos = (ArrayList)video.getVideosByName();
@@ -60,7 +52,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    }
    %>
    <tr><a href="upload.jsp?username=<%=session.getAttribute("username") %>">上传视频</a></tr>
-   <h3><%=request.getParameter("username") %></h3>
    </table>
   </body>
 </html>

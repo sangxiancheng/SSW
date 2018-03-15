@@ -36,7 +36,7 @@ public class DownloadAction  extends ActionSupport{
 		FileSystem fileSystem =null;
 		Path path=new Path("/ssw/"+name+"/"+VideoName);
 		Path dst=new Path("/download");
-		System.out.println(path);
+		//System.out.println(path);
 		FSDataInputStream in=null;
 		try{
 			fileSystem=FileSystem.get(configuration);

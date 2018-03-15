@@ -7,10 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'mainhead.jsp' starting page</title>
-    
+    <base href="<%=basePath%>">    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -23,6 +20,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my JSP page. <br>
+  <%
+  String username=session.getAttribute("username").toString();
+   %>
+   <h3><a href="main.jsp?username=<%=username%>">回到主页    </a>   欢迎<a href="userinfo.jsp?username=<%=username%>"><%=session.getAttribute("username") %></a>,<a href="logout.jsp">退出登录</a></h3>
   </body>
 </html>
