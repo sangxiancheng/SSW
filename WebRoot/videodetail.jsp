@@ -19,17 +19,14 @@
   </head>
   
   <body>
-  <jsp:useBean id="video" class="beans.Videos"/>
   <jsp:setProperty name="video" property="videoid" value="<%=request.getParameter(\"VideoID\") %>"/>
-   <%=request.getParameter("VideoID") %>
    <%
-   //String id=request.getParameter("VideoID"); 
    HashMap videoinfo = (HashMap)video.getVideoByVideoID();
    if(videoinfo!=null){
    %>
-   <form>
- 
+   <form action="download.action" method="post" enctype="multipart/form-data">
    <table align="center" width="50%" border="1">
+   <caption>视频详细信息</caption>
    <tr><th width="30%">视频ID:</th><td><%=videoinfo.get("VideoID") %></td></tr>
    <tr><th>视频名称:</th><td><%=videoinfo.get("VideoName") %></td></tr>
    <tr><th>视频关键字:</th><td><%=videoinfo.get("VideoKeys") %></td></th>
@@ -37,6 +34,10 @@
    <tr><th>视频大小:</th><td><%=videoinfo.get("VideoSize") %></td></tr>
    <tr><th>视频更新日期:</th><td><%=videoinfo.get("date(VideoDate)") %></td></tr>
    <tr><th>上传者:</th><td><%=videoinfo.get("Name") %></td></tr>
+   <tr><th></th><td><a href="MyStream.jsp?VideoLocation=<%=videoinfo.get("VideoLocation") %>&VideoName=<%=videoinfo.get("VideoName")%>">播放</a>
+   	<input type="hidden" name="VideoName" value="<%=videoinfo.get("VideoName") %>">
+	<input type="hidden" name="name" value="<%=videoinfo.get("Name")%>">
+   <input type="submit" value="下载"></td></tr>
    <%
    }
    %>
