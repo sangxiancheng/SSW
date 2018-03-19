@@ -5,8 +5,8 @@
     <constant name="struts.i18n.encoding" value="UTF-8" />
     <!-- 指定上传文件的保存路径,推荐使用绝对路径 -->
     <constant name="struts.multipart.saveDir" value="C:\\Up"></constant>
-    <!-- 指定允许上传的文件最大字节数。默认值是2097152(2M) -->
-    <constant name="struts.multipart.maxSize" value="10701096"/>
+    <!-- 指定允许上传的文件最大字节数。默认值是1073741824（1GB） -->
+    <constant name="struts.multipart.maxSize" value="1073741824"/>
     <package name="com.bik.action" extends="struts-default">  
      <action name="upload" class="com.bik.action.UploadAction">
            <result name="success">/success.jsp</result>

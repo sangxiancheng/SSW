@@ -16,16 +16,13 @@
   </head>  
     
   <body> 
-  <jsp:useBean id="video" class="beans.Videos"/>
   <jsp:setProperty name="video" property="name" value="<%=request.getParameter(\"username\") %>"/> 
    <center>  
-    <h1>选择文件上传</h1>
-    <h3><%=request.getParameter("username") %></h3>
-    <h3>欢迎<a href="userinfo.jsp"><%=session.getAttribute("username") %></a><a href="logout.jsp">退出登录</a></h3>
+    <h3>选择文件上传</h3>
       <form action="upload.action" method="post" enctype="multipart/form-data">  
         <table>  
             <tr>  
-                <th>上传文件:</th><td><input type="file" name="myFile" multiple="multiple"></td> 
+                <th>上传文件:</th><td><input type="file" name="myFile" multiple="multiple" accept="application/ogg, audio/ogg"></td> 
                 <input type="hidden" name="username" value="<%=request.getParameter("username") %>"/>     
             </tr>
             <tr>
