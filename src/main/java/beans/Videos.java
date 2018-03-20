@@ -126,10 +126,7 @@ public class Videos {
 	}
 	//删除video信息
 	public boolean delVideo(){
-		String sql = "delete from videotable where VideoID=?";
-		String[] params = {videoid};
-		int result1 = db.update(sql, params);
-		System.out.println(result1);
+		
 		Boolean result2=true;
 		
 		//HdfsOp hdfsOp = new HdfsOp();
@@ -147,6 +144,10 @@ public class Videos {
         	e.printStackTrace();
         	result2=false;
         }
+        String sql = "delete from videotable where VideoID=?";
+		String[] params = {videoid};
+		int result1 = db.update(sql, params);
+		System.out.println(result1);
 		if(result1==1&&result2==true){
 			return true;
 		}else

@@ -33,7 +33,7 @@
 	out.println("删除视频失败！");
 	}
 	out.println("5秒后自动跳转至主页面！");
-	response.setHeader("Refresh","5;url=main.jsp?username="+username);  
+	response.sendRedirect("main.jsp?username="+username);  
    %>
   </body>
 </html>

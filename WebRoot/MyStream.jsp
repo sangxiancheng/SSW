@@ -32,8 +32,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <% 
   String VideoName=request.getParameter("VideoName");
   String VideoLocation=request.getParameter("VideoLocation");
-  out.print(VideoName);
-  out.print(VideoLocation);
+  //out.print(VideoName);
+  //out.print(VideoLocation);
   %>
    <video width="480" height="360" controls class="center">
 	<source src="http://localhost:8080/SSW/stream?fpath=/ssw/<%=VideoLocation %>/<%=VideoName%>" type="video/mp4">
