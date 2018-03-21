@@ -1,6 +1,5 @@
 package beans;
 import java.util.List;
-import java.util.Map;
 import beans.DBUtil;
 public class Users {
 	private String name;// 用户姓名
@@ -118,7 +117,6 @@ public class Users {
 		user.setTruename(truename);
 		user.setEmail(email);
 		user.setName(name);
-		//System.out.println(name+" "+sex+" "+telephone+" "+major+" "+class1+" "+truename+" "+email);
 		try{
 			int result = user.updateUser();
 			System.out.println(result);
