@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</ul>
 							</li>
 						</ul>
-						<form action="searched.jsp?search=" method="post" class="navbar-form navbar-left" role="search">
+						<form action="searched.jsp" method="post" class="navbar-form navbar-left" role="search">
 							<div class="form-group">
 								<input type="text" name="search" class="form-control">
 							</div> <input type="submit" class="btn" value="搜索"></button>
@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								 <a>欢迎登录，<%=username %></a>
 							</li>
 							<li class="dropdown">
-								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">账户管理<strong class="caret"></strong></a>
+								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户信息管理<strong class="caret"></strong></a>
 								<ul class="dropdown-menu" width="50%">
 									<li>
 										 <a href="userinfo.jsp?username=<%=username%>">个人信息</a>
