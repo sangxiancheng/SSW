@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="mainhead.jsp" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -7,7 +7,7 @@
     <base href="<%=basePath%>">
     
     <title>SearchResultPage</title>
-    
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -26,7 +26,7 @@
   
   <body>
    <%
-   request.setCharacterEncoding("utf-8");
+   request.setCharacterEncoding("UTF-8");
    String search=request.getParameter("search"); %>
   <jsp:setProperty name="video" property="videoname" value="search"/>
 	<div class="container">

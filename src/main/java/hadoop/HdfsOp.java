@@ -105,7 +105,6 @@ public class HdfsOp {
 
 	public List<Files> getFile(Path path,FileSystem fs,List<Files> list) throws IOException {
 		FileStatus[] fileStatus = fs.listStatus(path);
-		//HttpServletRequest request=ServletActionContext.getRequest();
 		HttpServletRequest request1=ServletActionContext.getRequest();
 		String filename,home=(String)request1.getSession().getAttribute("username"),location=path.toString().replaceAll("/user/", "");
 		if(location.equals(home))
@@ -121,8 +120,6 @@ public class HdfsOp {
 		Cookie cookie1=new Cookie("prelocation",prelocation);
 		cookie1.setPath("/");
 		ServletActionContext.getResponse().addCookie(cookie1);
-		//request.setAttribute("location", location);
-		//String username=(String)request1.getSession().getAttribute("username");
 		long size;
 		if(fileStatus.length==0){
 			Files files=new Files();
@@ -233,13 +230,11 @@ public class HdfsOp {
 			fileSystem=FileSystem.get(configuration);
 			if(fileSystem == null) {
 				System.out.println("fileSystem is null!");
-				//return;
 				return "ERROR";
 			}
 			outStream = fileSystem.create(path);
 			if(outStream == null) {
 				System.out.println("out is null!");
-				//return;
 				return "ERROR";
 			}
 			Date n1 = new Date();
