@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								 <a>欢迎登录，<%=username %></a>
 							</li>
 							<li class="dropdown">
-								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">账户管理<strong class="caret"></strong></a>
+								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户信息管理<strong class="caret"></strong></a>
 								<ul class="dropdown-menu" width="50%">
 									<li>
 										 <a href="userinfo.jsp?username=<%=username%>">个人信息</a>

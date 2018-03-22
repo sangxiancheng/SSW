@@ -34,10 +34,11 @@
 
     <!-- Favicon and touch icons -->
     <script src="js/MainTable.js"></script>
-    
+    <script>
+    	var videosrc="";
+    </script>
   </head>
   <body>
-<<<<<<< HEAD
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">  
@@ -77,12 +78,11 @@
 					   <td><%=m.get("date(VideoDate)") %></td>
 					   <td><%=m.get("Name") %></td>
 					   <td><a class="btn btn-info" href="videodetail.jsp?VideoID=<%=m.get("VideoID")%>">详情</a></td>
-					   <td><a class="btn btn-primary" href="MyStream.jsp?VideoLocation=<%=m.get("VideoLocation") %>&VideoName=<%=m.get("VideoName")%>">播放</a></td>
+					   <td><a class="btn btn-primary" onclick="getValue(this)"  data-toggle="modal" data-target="#myModal" name="<%=m.get("VideoLocation") %>/<%=m.get("VideoName")%>">播放</a></td>
 					   <input type="hidden" name="VideoName" value="<%=m.get("VideoName") %>">
 					   <input type="hidden" name="name" value="<%=m.get("Name")%>">
 					   <td><input class="btn btn-success" type="submit" value="下载"></td>
 					   <td><a class="btn btn-danger" href="deletepage.jsp?VideoID=<%=m.get("VideoID")%>&&VideoName=<%=m.get("VideoName") %>" onclick="javascript:if(confirm('确定要删除该视频吗？删除后将无法恢复哦！')){return true;}return false;">删除</a></td>
-					  <!--  <td><button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"></button>  -->
 					  </form> 
 					  </tr>
 					  <%
@@ -107,7 +107,9 @@
 				</h4>
 			</div>
 			<div class="modal-body">
-				在这里添加一些文本
+				<video width="480" height="360" controls class="center" id="videoid">
+				<source id="videoidsrc" src="" type="video/mp4">
+				</video>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -119,41 +121,12 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 	</div>
-	
-=======
-  <form action="searched.jsp" method="post" accept-charset="UTF-8"><input type="text" name="search"><input type="submit" value="搜索"></form>
-  <table align="center" width="70%" border="1">
-  <caption>我上传的视频</caption>
-  <tr><th>序号</th><th>视频ID</th><th>视频名称</th><th>视频关键字</th><th>视频大小</th><th>更新日期</th><th>上传者</th><th>详情</th><th>在线播放</th><th>下载</th><th>删除</th></tr>
-   <%
-  ArrayList videos = (ArrayList)video.getVideosByName();
-  int i=1;
-  for(Object o:videos){
-  	Map m = (HashMap)o;
-   %>
-   
-   <tr>
-   <form action="download.action" method="post" enctype="multipart/form-data">  
-   <td><%=i++%></td>
-   <td><%=m.get("VideoID")%></td>
-   <td><%=m.get("VideoName") %></td>
-   <td><%=m.get("VideoKeys") %></td>
-   <td><%=m.get("VideoSize") %>KB</td>
-   <td><%=m.get("date(VideoDate)") %></td>
-   <td><%=m.get("Name") %></td>
-   <td><a href="videodetail.jsp?VideoID=<%=m.get("VideoID")%>">详情</a></td>
-   <td><a href="MyStream.jsp?VideoLocation=<%=m.get("VideoLocation") %>&VideoName=<%=m.get("VideoName")%>">播放</a></td>
-   	<input type="hidden" name="VideoName" value="<%=m.get("VideoName") %>">
-	<input type="hidden" name="name" value="<%=m.get("Name")%>">
-   <td><input type="submit" value="下载"></td>
-   <td><a href="deletepage.jsp?VideoID=<%=m.get("VideoID")%>&&VideoName=<%=m.get("VideoName") %>" onclick="javascript:if(confirm('确定要删除该视频吗？删除后将无法恢复哦！')){return true;}return false;">删除</a></td>
-   </form> 
-   </tr>
-   <%
-   }
-   %>
-   <tr><a href="upload.jsp?username=<%=session.getAttribute("username") %>">上传视频</a></tr>
-   </table>
->>>>>>> master
   </body>
+  <script>
+    function getValue(a){
+     var dsr=document.getElementById("videoid").src="http://localhost:8080/SSW/stream?fpath=/ssw/"+a.name;
+     
+    }
+  	//var oBtn = document.getElementById('')
+  </script>
 </html>
