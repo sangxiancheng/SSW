@@ -42,39 +42,34 @@ public class DBUtil {
 			con=DriverManager.getConnection(url, username, password);
 		}
 		catch(ClassNotFoundException e){
-			System.out.println("1"); 
 			e.printStackTrace();
 		}
 		catch(Exception e){
-			System.out.println("1"); 
 			e.printStackTrace();
 		}
 		return con;
 	}
+	
 	private PreparedStatement getPrepareStatement(String sql){
 		try{
 			pstmt=getConnection().prepareStatement(sql);
 		}
 		catch(Exception e){
-			System.out.println("2");
 			e.printStackTrace();
 		}
 		return pstmt;
 	}
+	
 	private void setParams(String sql,String[] params){
 		pstmt=this.getPrepareStatement(sql);
 		if(params!=null)
 		{
-		/*for(int i=0;i<params.length;i++){
-			System.out.print(params[i]);
-		}*/
-		for(int i=0;i<params.length;i++)
-			try{	
-				pstmt.setString(i+1, params[i]);
-			}
-			catch(SQLException e){
-				System.out.println("3");
-				e.printStackTrace();
+			for(int i=0;i<params.length;i++)
+				try{	
+					pstmt.setString(i+1, params[i]);
+				}
+				catch(SQLException e){
+					e.printStackTrace();
 			}
 		}
 	}
@@ -91,7 +86,6 @@ public class DBUtil {
 				String[] name=new String[count];
 				for(int i = 0;i<count;i++){
 					name[i]=rsmd.getColumnName(i+1);
-					//String colName = rsmd.getCatalogName(i);
 					m.put(name[i], rs.getString(name[i]));
 				}
 				list.add(m);
@@ -133,7 +127,6 @@ public class DBUtil {
 			recNo=pstmt.executeUpdate();
 		}
 		catch(Exception e) {
-			System.out.println("4");
 			e.printStackTrace();
 		}
 		finally {
@@ -151,8 +144,7 @@ public class DBUtil {
 				con.close();
 		}
 		catch(SQLException e) {
-			System.out.println("5");
-			
+			e.printStackTrace();
 		}
 	}
 }

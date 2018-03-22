@@ -1,16 +1,12 @@
-package beans;
+﻿package beans;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import beans.DBUtil;
-import hadoop.HdfsOp;
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import java.io.InputStream;
+
 public class Videos {
 	private String videoid;//视频ID
 	private String videoname;//视频名称
@@ -93,7 +89,6 @@ public class Videos {
 	public Map getVideoByVideoID(){
 		Map videos = null;
 		String sql = "select VideoID,VideoName,VideoSize,VideoLocation,VideoComments,VideoKeys,date(VideoDate),Name from videotable where VideoID=?";
-		//System.out.print(videoid);
 		String[] params={videoid};
 		videos = db.getMap(sql, params);
 		return videos;
@@ -129,13 +124,9 @@ public class Videos {
 		
 		Boolean result2=true;
 		
-		//HdfsOp hdfsOp = new HdfsOp();
 		org.apache.hadoop.conf.Configuration configuration= new Configuration();
 		FileSystem fileSystem =null;
-        //org.apache.hadoop.conf.Configuration conf = new Configuration();
-        System.out.println(videoname);
         Path path=new Path("/ssw/"+name+"/"+videoname);
-        System.out.println(path);
         try{
         	fileSystem=FileSystem.get(configuration);
         	result2 = fileSystem.delete(path,true);
