@@ -26,9 +26,9 @@
   
   <body>
    <%
-   request.setCharacterEncoding("UTF-8");
-   String search=request.getParameter("search"); %>
-  <jsp:setProperty name="video" property="videoname" value="search"/>
+   String search = new String(request.getParameter("search").getBytes("iso-8859-1"), "utf-8");
+   %>
+  <jsp:setProperty name="video" property="videoname" value="<%=search%>"/>
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">

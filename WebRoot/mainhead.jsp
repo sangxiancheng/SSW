@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</ul>
 							</li>
 						</ul>
-						<form action="searched.jsp?search=" method="post" class="navbar-form navbar-left" role="search">
+						<form action="searched.jsp" method="post" class="navbar-form navbar-left" role="search">
 							<div class="form-group">
 								<input type="text" name="search" class="form-control">
 							</div> <input type="submit" class="btn" value="搜索"></button>

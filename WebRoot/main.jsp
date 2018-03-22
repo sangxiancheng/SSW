@@ -125,7 +125,6 @@
   <script>
     function getValue(a){
      var dsr=document.getElementById("videoid").src="http://localhost:8080/SSW/stream?fpath=/ssw/"+a.name;
-     
     }
   	//var oBtn = document.getElementById('')
   </script>
