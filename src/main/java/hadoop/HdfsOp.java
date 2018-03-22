@@ -25,6 +25,7 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IOUtils;
 import org.apache.struts2.ServletActionContext;
+import java.io.ByteArrayOutputStream;
 
 import com.bik.action.Files;
 
@@ -164,55 +165,100 @@ public class HdfsOp {
 		}
 		return list;
 	}
+	public void createFile(Configuration conf, String filePath, byte[] contents) throws IOException {
+		 FileSystem fs = FileSystem.get(conf);
+		 Path path = new Path(filePath);
+		 FSDataOutputStream outputStream = fs.create(path);
+		 outputStream.write(contents);
+		 outputStream.close();
+		 fs.close();
+	}
+	public void createFile(Configuration conf, String filePath, String fileContent) throws IOException {
+		 createFile(conf, filePath, fileContent.getBytes());
+	}
+	public boolean exits(Configuration conf, String path) throws IOException {//判断路径是否存在
+		FileSystem fs = FileSystem.get(conf);
+		return fs.exists(new Path(path));
+	}
+	public boolean createDirectory(Configuration conf, String dirName) throws IOException {
+		FileSystem fs = FileSystem.get(conf);
+		Path dir = new Path(dirName);
+		boolean result = fs.mkdirs(dir);
+		fs.close();
+		return result;
+	}
+	public void copyFromLocalFile(Configuration conf, String localFilePath, String remoteFilePath) throws IOException {
+		FileSystem fs = FileSystem.get(conf);
+		Path localPath = new Path(localFilePath);
+		Path remotePath = new Path(remoteFilePath);
+		fs.copyFromLocalFile(false, true, localPath, remotePath);
+		fs.close();
+	}
 	
-	public void copyToHDFS(InputStream inputStream,String pathString){
+	public String readFile(Configuration conf, String filePath) throws IOException {
+		String fileContent = null;
+		FileSystem fs = FileSystem.get(conf);
+		Path path = new Path(filePath);
+		InputStream inputStream = null;
+		ByteArrayOutputStream outputStream = null;
+		try{
+			inputStream = fs.open(path);
+			outputStream = new ByteArrayOutputStream(inputStream.available());
+			IOUtils.copyBytes(inputStream, outputStream, conf);
+			fileContent = outputStream.toString();
+		} finally {
+			IOUtils.closeStream(inputStream);
+            IOUtils.closeStream(outputStream);
+            fs.close();
+		}
+            
+            return fileContent;
+	}
+	public void copyFromLocalFile1(Configuration conf, String localFilePath, String remoteFilePath) throws IOException {
+		FileSystem fs = FileSystem.get(conf);
+		Path localPath = new Path(localFilePath);
+		Path remotePath = new Path(remoteFilePath);
+		fs.copyFromLocalFile(false, true, localPath, remotePath);
+		fs.close();
+	}
+	public String copyToHDFS(InputStream inputStream,String stringPath){
 
-		org.apache.hadoop.conf.Configuration  configuration= new Configuration();
-
+		org.apache.hadoop.conf.Configuration configuration= new Configuration();
 		FileSystem fileSystem =null;
-		Path path=new Path(pathString);
+		Path path=new Path(stringPath);
+		System.out.print(path);
 		FSDataOutputStream outStream = null; 
 		long between;
-
 		try {	
 			fileSystem=FileSystem.get(configuration);
 			if(fileSystem == null) {
 				System.out.println("fileSystem is null!");
-				return;
+				//return;
+				return "ERROR";
 			}
-
 			outStream = fileSystem.create(path);
 			if(outStream == null) {
 				System.out.println("out is null!");
-				return;
+				//return;
+				return "ERROR";
 			}
-
 			Date n1 = new Date();
-
 			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 			Date begin = sdFormat.parse(sdFormat.format(n1));
-
-			//IOUtils.copyBytes(inputStream, outStream, configuration);
-
 			Date n2 = new Date();
-
 			Date end = sdFormat.parse(sdFormat.format(n2));
-
 			between = (end.getTime()-begin.getTime());
-
-			System.out.println(between);
-
+			System.out.println("上传时间为"+between);
 			byte[] buffer = new byte[1024];
 			int length = 0;
 			while ((length = inputStream.read(buffer)) > 0) {
 				outStream.write(buffer, 0, length);
 			}
-
 			outStream.flush();
 			inputStream.close();
 		} catch (Exception e) {
-
 			e.printStackTrace();
+			return "ERROR";
 		}
 		finally
 		{
@@ -220,12 +266,14 @@ public class HdfsOp {
 				try {
 					outStream.close();
 					fileSystem.close();
+					return "SUCCESS";
 				} catch (Exception e2) {
 					e2.printStackTrace();
+					return "ERROR";
 				}
 
 		}
-
+		return "SUCCESS";
 	}
 
 	public String downLoadFile(String localPath,String HDFSPath) {
@@ -389,7 +437,8 @@ public class HdfsOp {
 
 	public static void main(String[] args) throws Exception {
 		HdfsOp cp = new HdfsOp();
-		String HDFSPath = "1.txt";
+		String myFileFileName="1.txt";
+		String userName = "username";
 		String localPath = "e:\\1.txt";	
 
 		long between;
@@ -400,7 +449,7 @@ public class HdfsOp {
 		Date begin = sdFormat.parse(sdFormat.format(n1));
 
 		InputStream inputStream = new FileInputStream(new File(localPath));
-		cp.copyToHDFS(inputStream, HDFSPath);
+		cp.copyToHDFS(inputStream, userName);
 		// cp.downLoad(localPath,HDFS);
 
 		Date n2 = new Date();

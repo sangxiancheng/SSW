@@ -39,6 +39,30 @@ public class Users {
 	public void setTelephone(String telephone){
 		this.telephone=telephone;
 	}
+	public String getMajor(){
+		return major;
+	}
+	public void setMajor(String major){
+		this.major=major;
+	}
+	public String getClass1(){
+		return class1;
+	}
+	public void setClass1(String class1){
+		this.class1=class1;
+	}
+	public String getTruename(){
+		return truename;
+	}
+	public void setTruename(String truename){
+		this.truename=truename;
+	}
+	public String getEmail(){
+		return email;
+	}
+	public void setEmail(String email){
+		this.email=email;
+	}
 	//添加用户信息
 	public int addUser(){
 		int result = 0;
@@ -55,18 +79,18 @@ public class Users {
 		return users;
 	}
 	//通过用户Name查询用户信息
-	public Map getUser(){
-		Map user = null;
+	public List getUserByName(){
+		List user = null;
 		String sql = "select * from usertable where Name=?";
 		String[] params={name};
-		user = db.getMap(sql, params);
+		user = db.getList(sql, params);
 		return user;
 	}
 	//通过用户Name修改用户信息
 	public int updateUser(){
 		int result = 0;
-		String sql = "update usertable set Sex=?,Major=?,Class=?,TrueName=?,Email=? where Name=?";
-		String[] params = {sex,major,class1,truename,email,name};
+		String sql = "update usertable set Sex=?,Telephone=?,Major=?,Class=?,TrueName=?,Email=? where Name=?";
+		String[] params = {sex,telephone,major,class1,truename,email,name};
 		result = db.update(sql, params);
 		return result;
 	}
@@ -85,4 +109,30 @@ public class Users {
 		result = db.getPassword(sql, params);
 		return result;
 	}
+	public String execute() throws Exception { 
+		Users user = new Users();
+		user.setSex(sex);
+		user.setTelephone(telephone);
+		user.setMajor(major);
+		user.setClass1(class1);
+		user.setTruename(truename);
+		user.setEmail(email);
+		user.setName(name);
+		//System.out.println(name+" "+sex+" "+telephone+" "+major+" "+class1+" "+truename+" "+email);
+		try{
+			int result = user.updateUser();
+			System.out.println(result);
+			if(result==1){
+				System.out.println("修改成功！");
+				return "success";
+			}
+			else{
+				System.out.println("修改失败！");
+				return "error";
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+        return "SUCCESS";  
+    } 
 }

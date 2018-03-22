@@ -13,27 +13,35 @@ import javax.swing.JOptionPane;
 
 public class DownloadAction  extends ActionSupport{  
     // username属性用来封装用户名  
-    private String FileName;  
+    private String VideoName; 
+    private String name;
           
    //获得FileFileName值  
-    public String getFileName() {  
-        return FileName;  
+    public String getVideoName() {  
+        return VideoName;  
     }  
-  
     //设置FileName值  
-    public void setFileName(String FileName) { 
-        this.FileName = FileName;  
+    public void setVideoName(String VideoName) { 
+        this.VideoName = VideoName;  
     }  
+    public String getName(){
+    	return name;
+    }
+    public void setName(String name){
+    	this.name=name;
+    }
 
     public InputStream getInputStream() {
-    	org.apache.hadoop.conf.Configuration  configuration= new Configuration();
-
+    	org.apache.hadoop.conf.Configuration configuration= new Configuration();
 		FileSystem fileSystem =null;
-		Path path=new Path(FileName);
+		Path path=new Path("/ssw/"+name+"/"+VideoName);
+		Path dst=new Path("/download");
+		//System.out.println(path);
 		FSDataInputStream in=null;
 		try{
 			fileSystem=FileSystem.get(configuration);
 			in =  fileSystem.open(path);
+			//fileSystem.copyToLocalFile(path, dst);
 			//fileSystem.copyToLocalFile(path, new Path("/home/user"));
 			if(in == null) {
 				System.out.println("File not found in hadoop current dir.");
@@ -46,7 +54,6 @@ public class DownloadAction  extends ActionSupport{
     }
   
     public String execute() throws Exception {  
-
         return SUCCESS;  
     }  
   

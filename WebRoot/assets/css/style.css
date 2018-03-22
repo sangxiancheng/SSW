@@ -148,6 +148,10 @@ img { max-width: 100%; }
 	width: 100%;
 }
 
+.form-bottom form button.btnr {
+	width: 100%;
+}
+
 .form-bottom form .input-error {
 	border-color: #de995e;
 }

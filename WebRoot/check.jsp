@@ -7,8 +7,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">   
-    <title>视频播放</title>   
+    <base href="<%=basePath%>">
+    
+    <title>登录提醒</title>
+    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -17,26 +19,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<style>
-		.center
-		{
-			border-style: solid solid solid solid;
-			position: absolute;
-  			left: 30%;
-  			top: 50px;
-		}
-	</style>
+
   </head>
   
   <body>
-  <% 
-  String VideoName=request.getParameter("VideoName");
-  String VideoLocation=request.getParameter("VideoLocation");
-  //out.print(VideoName);
-  //out.print(VideoLocation);
-  %>
-   <video width="480" height="360" controls class="center">
-	<source src="http://localhost:8080/SSW/stream?fpath=/ssw/<%=VideoLocation %>/<%=VideoName%>" type="video/mp4">
-	</video> 
+   <%
+   String username=(String)session.getAttribute("username");
+   if(username==null){
+   		out.println("<h3>请先登录再访问，5秒后将返回<a href=\"login.html\">登录页面</a>!</h3>");
+   		response.setHeader("Refresh","5;url=login.html");
+   		return;
+   }
+    %>
   </body>
 </html>
