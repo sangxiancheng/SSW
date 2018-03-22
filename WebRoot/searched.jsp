@@ -7,7 +7,7 @@
     <base href="<%=basePath%>">
     
     <title>SearchResultPage</title>
-    
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -21,11 +21,12 @@
   
   <body>
    <%
-   request.setCharacterEncoding("utf-8");
+   request.setCharacterEncoding("UTF-8");
    String search=request.getParameter("search"); %>
-  <jsp:setProperty name="video" property="videoname" value="视频"/>
+  <jsp:setProperty name="video" property="videoname" value="search"/>
    <table align="center" width="50%" border="1">
-  
+  <%=request.getParameter("search") %>
+  <%=search %>
   <caption>搜索结果</caption>
   <tr><th>序号</th><th>视频名称</th><th>视频关键字</th><th>视频大小</th><th>更新日期</th><th>上传者</th><th>详情</th><th>在线播放</th><th>下载</th></tr>
    <%

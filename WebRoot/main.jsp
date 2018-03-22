@@ -8,7 +8,7 @@
     <base href="<%=basePath%>">
     
     <title>教学视频存储和共享平台</title>
-    
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <meta http-equiv="charset" content="utf-8">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -20,7 +20,7 @@
 	-->
   </head>
   <body>
-  <form action="searched.jsp" method="post"><input type="text" name="search"><input type="submit" value="搜索"></form>
+  <form action="searched.jsp" method="post" accept-charset="UTF-8"><input type="text" name="search"><input type="submit" value="搜索"></form>
   <table align="center" width="70%" border="1">
   <caption>我上传的视频</caption>
   <tr><th>序号</th><th>视频ID</th><th>视频名称</th><th>视频关键字</th><th>视频大小</th><th>更新日期</th><th>上传者</th><th>详情</th><th>在线播放</th><th>下载</th><th>删除</th></tr>
