@@ -45,7 +45,6 @@
 					        <th>上传者</th>
 					        <th>详情</th>
 					        <th>在线播放</th>
-					        <th>下载</th>
 					    </tr>
 					    </thead>
 					   <%
@@ -64,10 +63,9 @@
 						   <td><%=m.get("date(VideoDate)") %></td>
 						   <td><%=m.get("Name") %></td>
 						   <td><a class="btn btn-info" href="videodetail.jsp?VideoID=<%=m.get("VideoID")%>">详情</a></td>
-						   <td><a class="btn btn-primary" href="MyStream.jsp?VideoLocation=<%=m.get("VideoLocation") %>&VideoName=<%=m.get("VideoName")%>">播放</a></td>
+						   <td><a class="btn btn-primary" onclick="getValue(this)"  data-toggle="modal" data-target="#myModal" name="<%=m.get("VideoLocation") %>/<%=m.get("VideoName")%>">播放</a></td>
 						   <input type="hidden" name="VideoName" value="<%=m.get("VideoName") %>">
 						   <input type="hidden" name="name" value="<%=m.get("Name")%>">
-						   <td><input class="btn btn-success" type="submit" value="下载"></td>
 					   </form> 
 					   </tr>
 					   <%
@@ -79,5 +77,37 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					播放界面
+				</h4>
+			</div>
+			<div class="modal-body">
+				<video width="480" height="360" controls class="center" id="videoid">
+				<source id="videoidsrc" src="" type="video/mp4">
+				</video>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary">
+					提交更改
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+	</div>
   </body>
+  <script>
+    function getValue(a){
+     var dsr=document.getElementById("videoid").src="http://localhost:8080/SSW/stream?fpath=/ssw/"+a.name;
+    }
+  	//var oBtn = document.getElementById('')
+  </script>
 </html>

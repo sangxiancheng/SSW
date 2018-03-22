@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   //out.print(VideoLocation);
   %>
    <video width="480" height="360" controls class="center">
-	<source src="http://localhost:8080/SSW/stream?fpath=/ssw/<%=VideoLocation %>/<%=VideoName%>" type="video/mp4">
+	<source src="http://localhost:8080/SSW/stream?fpath=/ssw/sang/poop.ogg" type="video/mp4">
 	</video> 
   </body>
 </html>

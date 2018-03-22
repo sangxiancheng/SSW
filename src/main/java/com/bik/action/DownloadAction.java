@@ -9,23 +9,24 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class DownloadAction  extends ActionSupport{   
     private String VideoName; 
-    private String name;      
+    private String name1;      
     public String getVideoName() {  
         return VideoName;  
     }   
     public void setVideoName(String VideoName) { 
         this.VideoName = VideoName;  
     }  
-    public String getName(){
-    	return name;
+    public String getName1(){
+    	return name1;
     }
-    public void setName(String name){
-    	this.name=name;
+    public void setName1(String name){
+    	this.name1=name;
     }
     public InputStream getInputStream() {
     	org.apache.hadoop.conf.Configuration configuration= new Configuration();
+    	
 		FileSystem fileSystem =null;
-		Path path=new Path("/ssw/"+name+"/"+VideoName);
+		Path path=new Path("/ssw/"+name1+"/"+VideoName);
 		FSDataInputStream in=null;
 		try{
 			fileSystem=FileSystem.get(configuration);

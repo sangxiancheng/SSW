@@ -34,9 +34,6 @@
 
     <!-- Favicon and touch icons -->
     <script src="js/MainTable.js"></script>
-    <script>
-    	var videosrc="";
-    </script>
   </head>
   <body>
 	<div class="container">
@@ -58,7 +55,6 @@
 					        <th>上传者</th>
 					        <th>详情</th>
 					        <th>播放</th>
-					        <th>下载</th>
 					        <th>删除</th>
 					    </tr>
 					    </thead>
@@ -70,7 +66,7 @@
 					  %>
 					  
 					  <tr class="text-center">
-					  <form action="download.action" method="post" enctype="multipart/form-data">  
+					  <form action="download.action" name="download" id="downloadForm" method="post" enctype="multipart/form-data">  
 					   <td><%=i++%></td>
 					   <td><%=m.get("VideoName") %></td>
 					   <td><%=m.get("VideoKeys") %></td>
@@ -80,8 +76,7 @@
 					   <td><a class="btn btn-info" href="videodetail.jsp?VideoID=<%=m.get("VideoID")%>">详情</a></td>
 					   <td><a class="btn btn-primary" onclick="getValue(this)"  data-toggle="modal" data-target="#myModal" name="<%=m.get("VideoLocation") %>/<%=m.get("VideoName")%>">播放</a></td>
 					   <input type="hidden" name="VideoName" value="<%=m.get("VideoName") %>">
-					   <input type="hidden" name="name" value="<%=m.get("Name")%>">
-					   <td><input class="btn btn-success" type="submit" value="下载"></td>
+					   <input type="hidden" name="name1" value="<%=m.get("Name")%>">
 					   <td><a class="btn btn-danger" href="deletepage.jsp?VideoID=<%=m.get("VideoID")%>&&VideoName=<%=m.get("VideoName") %>" onclick="javascript:if(confirm('确定要删除该视频吗？删除后将无法恢复哦！')){return true;}return false;">删除</a></td>
 					  </form> 
 					  </tr>
@@ -114,9 +109,6 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 				</button>
-				<button type="button" class="btn btn-primary">
-					提交更改
-				</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
@@ -125,6 +117,7 @@
   <script>
     function getValue(a){
      var dsr=document.getElementById("videoid").src="http://localhost:8080/SSW/stream?fpath=/ssw/"+a.name;
+     alert(dsr);
     }
   	//var oBtn = document.getElementById('')
   </script>

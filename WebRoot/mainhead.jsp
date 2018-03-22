@@ -39,9 +39,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   </head>
   
-  <body>
   <jsp:useBean id="video" class="beans.Videos"></jsp:useBean>
   <jsp:setProperty name="video" property="name" value="<%=request.getParameter(\"username\") %>"/>
+  <body>
   <%
   String username=session.getAttribute("username").toString();
    %>
@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								 <a href="main.jsp?username=<%=username%>">我的视频</a>
 							</li>
 							<li>
-								 <a href="main.jsp">主页</a>
+								 <a href="home.jsp?username=<%=username%>">主页</a>
 							</li>
 							<li class="dropdown">
 								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">分类导航<strong class="caret"></strong></a>

@@ -82,11 +82,15 @@
 					</div>
 				</div>
 				<div class="form-group">
-					 <label class="col-sm-2 control-label">操作</label>
+					 <label class="col-sm-2 control-label">在线播放</label>
+					 <div class="col-sm-8">	
+						<video width="480" height="360" controls class="center" id="videoid">
+						<source id="videoidsrc" src="http://localhost:8080/SSW/stream?fpath=/ssw/<%=videoinfo.get("VideoLocation") %>/<%=videoinfo.get("VideoName")%>" type="video/mp4">
+						</video>
+					 </div>
 					<div class="col-sm-5">
-						<a class="btn btn-default" href="MyStream.jsp?VideoLocation=<%=videoinfo.get("VideoLocation") %>&VideoName=<%=videoinfo.get("VideoName")%>">播放</a>
 						<input type="hidden" name="VideoName" value="<%=videoinfo.get("VideoName") %>">
-						<input type="hidden" name="name" value="<%=videoinfo.get("Name")%>">
+						<input type="hidden" name="name1" value="<%=videoinfo.get("Name")%>">
 						<button type="submit" class="btn btn-default">下载</button>
 					</div>
 				</div>
